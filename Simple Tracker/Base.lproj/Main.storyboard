@@ -448,8 +448,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-8z-9a9">
-                                <rect key="frame" x="243" y="310" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bce-td-bnZ">
+                                <rect key="frame" x="223" y="310" width="90" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" image="NSTouchBarPlayTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bce-td-bnZ">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -458,7 +458,7 @@
                                 </connections>
                             </button>
                             <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-jM-JC3">
-                                <rect key="frame" x="18" y="314" width="226" height="25"/>
+                                <rect key="frame" x="18" y="314" width="206" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Projects" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="LFX-n1-cWC" id="FEz-Qn-CdQ">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -890,5 +890,6 @@ DQ
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
     </resources>
 </document>

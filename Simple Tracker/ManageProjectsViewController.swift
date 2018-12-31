@@ -97,7 +97,7 @@ class ManageProjectsViewController: NSViewController {
                 return
             }
             if !ProjectHelper.items[itemsIndex].setName(sender.stringValue) {
-                showAlert("Invalid Project Name", message: "Please enter a project name that is unique and not empty.")
+                showAlert("Invalid Project Name", message: "Please enter a valid project name that is unique.")
                 // reset table cell text
                 (row as! NSTableCellView).textField?.stringValue = ProjectHelper.items[itemsIndex].name
             }

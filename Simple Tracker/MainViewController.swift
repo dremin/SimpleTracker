@@ -96,6 +96,7 @@ class MainViewController: NSViewController {
         if isTracking {
             // now tracking
             addButton.title = secondsString(seconds)
+            addButton.image = NSImage(named: "NSTouchBarRecordStopTemplate")
             
             // start timer
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { t in
@@ -112,6 +113,7 @@ class MainViewController: NSViewController {
             
             // reset state
             addButton.title = "Start"
+            addButton.image = NSImage(named: "NSTouchBarPlayTemplate")
             addNotesField.stringValue = ""
             seconds = 0
             timer = nil

@@ -98,6 +98,10 @@ class ProjectHelper {
         return names
     }
     
+    static func sort() {
+        items = items.sorted(by: { $0.name < $1.name })
+    }
+    
     // MARK: Persistence
     static func load() {
         do {
@@ -110,6 +114,7 @@ class ProjectHelper {
     }
     
     public static func save() {
+        sort()
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(ProjectHelper.items)
