@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22AA070321D1441D005663AC /* ManageProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AA070221D1441D005663AC /* ManageProjectsViewController.swift */; };
 		22BDA05321CEE069008C98A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA05221CEE069008C98A7 /* AppDelegate.swift */; };
-		22BDA05521CEE069008C98A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA05421CEE069008C98A7 /* ViewController.swift */; };
+		22BDA05521CEE069008C98A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA05421CEE069008C98A7 /* MainViewController.swift */; };
 		22BDA05721CEE06B008C98A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BDA05621CEE06B008C98A7 /* Assets.xcassets */; };
 		22BDA05A21CEE06B008C98A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BDA05821CEE06B008C98A7 /* Main.storyboard */; };
+		22BDA06721CEEF53008C98A7 /* ProjectHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA06621CEEF53008C98A7 /* ProjectHelper.swift */; };
+		22BDA06921CEEF60008C98A7 /* TrackedItemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA06821CEEF60008C98A7 /* TrackedItemHelper.swift */; };
+		22BDA06C21CEFA7D008C98A7 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA06B21CEFA7D008C98A7 /* Project.swift */; };
+		22BDA06E21CEFA8B008C98A7 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA06D21CEFA8B008C98A7 /* TrackedItem.swift */; };
+		22BDA07021CF0018008C98A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA06F21CF0018008C98A7 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22BDA04F21CEE069008C98A7 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22AA070221D1441D005663AC /* ManageProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProjectsViewController.swift; sourceTree = "<group>"; };
+		22BDA04F21CEE069008C98A7 /* Simple Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BDA05221CEE069008C98A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22BDA05421CEE069008C98A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22BDA05421CEE069008C98A7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		22BDA05621CEE06B008C98A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BDA05921CEE06B008C98A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22BDA05B21CEE06B008C98A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22BDA05C21CEE06B008C98A7 /* TimeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeTracker.entitlements; sourceTree = "<group>"; };
+		22BDA05C21CEE06B008C98A7 /* Simple Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Simple Tracker.entitlements"; sourceTree = "<group>"; };
+		22BDA06621CEEF53008C98A7 /* ProjectHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHelper.swift; sourceTree = "<group>"; };
+		22BDA06821CEEF60008C98A7 /* TrackedItemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedItemHelper.swift; sourceTree = "<group>"; };
+		22BDA06B21CEFA7D008C98A7 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		22BDA06D21CEFA8B008C98A7 /* TrackedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
+		22BDA06F21CF0018008C98A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +49,7 @@
 		22BDA04621CEE069008C98A7 = {
 			isa = PBXGroup;
 			children = (
-				22BDA05121CEE069008C98A7 /* TimeTracker */,
+				22BDA05121CEE069008C98A7 /* Simple Tracker */,
 				22BDA05021CEE069008C98A7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,30 +57,36 @@
 		22BDA05021CEE069008C98A7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22BDA04F21CEE069008C98A7 /* TimeTracker.app */,
+				22BDA04F21CEE069008C98A7 /* Simple Tracker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22BDA05121CEE069008C98A7 /* TimeTracker */ = {
+		22BDA05121CEE069008C98A7 /* Simple Tracker */ = {
 			isa = PBXGroup;
 			children = (
 				22BDA05221CEE069008C98A7 /* AppDelegate.swift */,
-				22BDA05421CEE069008C98A7 /* ViewController.swift */,
+				22BDA05421CEE069008C98A7 /* MainViewController.swift */,
 				22BDA05621CEE06B008C98A7 /* Assets.xcassets */,
 				22BDA05821CEE06B008C98A7 /* Main.storyboard */,
+				22AA070221D1441D005663AC /* ManageProjectsViewController.swift */,
+				22BDA06621CEEF53008C98A7 /* ProjectHelper.swift */,
+				22BDA06F21CF0018008C98A7 /* Logger.swift */,
+				22BDA06821CEEF60008C98A7 /* TrackedItemHelper.swift */,
+				22BDA06B21CEFA7D008C98A7 /* Project.swift */,
+				22BDA06D21CEFA8B008C98A7 /* TrackedItem.swift */,
 				22BDA05B21CEE06B008C98A7 /* Info.plist */,
-				22BDA05C21CEE06B008C98A7 /* TimeTracker.entitlements */,
+				22BDA05C21CEE06B008C98A7 /* Simple Tracker.entitlements */,
 			);
-			path = TimeTracker;
+			path = "Simple Tracker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22BDA04E21CEE069008C98A7 /* TimeTracker */ = {
+		22BDA04E21CEE069008C98A7 /* Simple Tracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22BDA05F21CEE06B008C98A7 /* Build configuration list for PBXNativeTarget "TimeTracker" */;
+			buildConfigurationList = 22BDA05F21CEE06B008C98A7 /* Build configuration list for PBXNativeTarget "Simple Tracker" */;
 			buildPhases = (
 				22BDA04B21CEE069008C98A7 /* Sources */,
 				22BDA04C21CEE069008C98A7 /* Frameworks */,
@@ -78,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = TimeTracker;
+			name = "Simple Tracker";
 			productName = TimeTracker;
-			productReference = 22BDA04F21CEE069008C98A7 /* TimeTracker.app */;
+			productReference = 22BDA04F21CEE069008C98A7 /* Simple Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +116,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 22BDA04A21CEE069008C98A7 /* Build configuration list for PBXProject "TimeTracker" */;
+			buildConfigurationList = 22BDA04A21CEE069008C98A7 /* Build configuration list for PBXProject "Simple Tracker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -111,7 +129,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22BDA04E21CEE069008C98A7 /* TimeTracker */,
+				22BDA04E21CEE069008C98A7 /* Simple Tracker */,
 			);
 		};
 /* End PBXProject section */
@@ -133,8 +151,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BDA05521CEE069008C98A7 /* ViewController.swift in Sources */,
+				22BDA05521CEE069008C98A7 /* MainViewController.swift in Sources */,
 				22BDA05321CEE069008C98A7 /* AppDelegate.swift in Sources */,
+				22BDA06921CEEF60008C98A7 /* TrackedItemHelper.swift in Sources */,
+				22BDA06E21CEFA8B008C98A7 /* TrackedItem.swift in Sources */,
+				22BDA07021CF0018008C98A7 /* Logger.swift in Sources */,
+				22BDA06C21CEFA7D008C98A7 /* Project.swift in Sources */,
+				22AA070321D1441D005663AC /* ManageProjectsViewController.swift in Sources */,
+				22BDA06721CEEF53008C98A7 /* ProjectHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,15 +295,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TimeTracker/TimeTracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Simple Tracker/Simple Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TimeTracker/Info.plist;
+				INFOPLIST_FILE = "Simple Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.scj.TimeTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = me.scj.SimpleTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -289,15 +313,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TimeTracker/TimeTracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Simple Tracker/Simple Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TimeTracker/Info.plist;
+				INFOPLIST_FILE = "Simple Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.scj.TimeTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = me.scj.SimpleTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -306,7 +330,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22BDA04A21CEE069008C98A7 /* Build configuration list for PBXProject "TimeTracker" */ = {
+		22BDA04A21CEE069008C98A7 /* Build configuration list for PBXProject "Simple Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22BDA05D21CEE06B008C98A7 /* Debug */,
@@ -315,7 +339,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22BDA05F21CEE06B008C98A7 /* Build configuration list for PBXNativeTarget "TimeTracker" */ = {
+		22BDA05F21CEE06B008C98A7 /* Build configuration list for PBXNativeTarget "Simple Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22BDA06021CEE06B008C98A7 /* Debug */,
