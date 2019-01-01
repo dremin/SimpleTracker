@@ -9,35 +9,30 @@
 import Foundation
 
 class TrackedItemHelper {
-    static var items: [TrackedItem] = []
+    // MARK: Constants
+    static let instance = TrackedItemHelper()
     
-    // MARK: Archiving Paths
-    static let ArchiveURL = getUrl()
+    // MARK: Properties
+    var items: [TrackedItem] = []
+    var archiveURL: URL
     
-    // MARK: Functions
-    public static func initialize() {
-        if TrackedItemHelper.items.count == 0 {
+    private init() {
+        // get plist url
+        do {
+            archiveURL = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("SimpleTracker.TrackedItems.plist")
+        } catch {
+            archiveURL = URL(fileURLWithPath: "~/Library/Application Support/SimpleTracker.TrackedItems.plist")
+        }
+        
+        // load data
+        if items.count == 0 {
             load()
         }
     }
     
-    public static func reload() {
-        load()
-    }
-    
-    static func getUrl() -> URL {
-        var url: URL
-        do {
-            url = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("SimpleTracker.TrackedItems.plist")
-        } catch {
-            url = URL(fileURLWithPath: "~/Library/Application Support/SimpleTracker.TrackedItems.plist")
-        }
-        
-        return url
-    }
-    
-    static func getTrackedItem(id: Int) -> TrackedItem? {
-        for trackedItem in TrackedItemHelper.items {
+    // MARK: Functions
+    func getTrackedItem(id: Int) -> TrackedItem? {
+        for trackedItem in items {
             if trackedItem.id == id {
                 return trackedItem
             }
@@ -47,21 +42,21 @@ class TrackedItemHelper {
     }
     
     // MARK: Persistence
-    static func load() {
+    func load() {
         do {
-            let data = try Data(contentsOf: ArchiveURL)
+            let data = try Data(contentsOf: archiveURL)
             let decoder = PropertyListDecoder()
-            TrackedItemHelper.items = try decoder.decode([TrackedItem].self, from: data)
+            items = try decoder.decode([TrackedItem].self, from: data)
         } catch {
             Logger.log("Error decoding tracked items: %@", error.localizedDescription)
         }
     }
     
-    public static func save() {
+    func save() {
         let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(TrackedItemHelper.items)
-            try data.write(to: ArchiveURL)
+            let data = try encoder.encode(items)
+            try data.write(to: archiveURL)
         } catch {
             Logger.log("Error encoding tracked items: %@", error.localizedDescription)
         }

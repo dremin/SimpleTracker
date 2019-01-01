@@ -14,10 +14,10 @@ class Project: Codable {
     
     init?(name: String) {
         self.id = -1
-        for i in 0...ProjectHelper.items.count {
+        for i in 0...ProjectHelper.instance.items.count {
             // get and use the lowest unused id
             var canUse = true
-            ProjectHelper.items.forEach { project in
+            ProjectHelper.instance.items.forEach { project in
                 if project.id == i {
                     canUse = false
                 }
@@ -43,7 +43,7 @@ class Project: Codable {
         }
         
         var unique = true
-        ProjectHelper.items.forEach { project in
+        ProjectHelper.instance.items.forEach { project in
             if project.name == newName && project.id != self.id {
                 unique = false
             }

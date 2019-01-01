@@ -48,11 +48,11 @@ class ManageProjectsViewController: NSViewController {
     
     // MARK: Button actions
     @IBAction func addButtonPressed(_ sender: NSButton) {
-        ProjectHelper.items.append(Project(name: ProjectHelper.generateNewName())!)
+        ProjectHelper.instance.items.append(Project(name: ProjectHelper.instance.generateNewName())!)
         tableView.beginUpdates()
-        tableView.insertRows(at: IndexSet(integer: ProjectHelper.items.count - 1), withAnimation: .slideDown)
+        tableView.insertRows(at: IndexSet(integer: ProjectHelper.instance.items.count - 1), withAnimation: .slideDown)
         tableView.endUpdates()
-        tableView.editColumn(0, row: ProjectHelper.items.count - 1, with: nil, select: true)
+        tableView.editColumn(0, row: ProjectHelper.instance.items.count - 1, with: nil, select: true)
     }
     
     @IBAction func removeButtonPressed(_ sender: NSButton) {
@@ -64,10 +64,10 @@ class ManageProjectsViewController: NSViewController {
             let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
             
             if rowId >= 0 {
-                guard let itemsIndex = ProjectHelper.items.index(where: { $0 === ProjectHelper.getProject(id: rowId) }) else {
+                guard let itemsIndex = ProjectHelper.instance.items.index(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
                     continue
                 }
-                ProjectHelper.items.remove(at: itemsIndex)
+                ProjectHelper.instance.items.remove(at: itemsIndex)
             }
         }
         
@@ -76,10 +76,10 @@ class ManageProjectsViewController: NSViewController {
     
     @IBAction func closeButtonPressed(_ sender: NSButton) {
         // save
-        ProjectHelper.save()
+        ProjectHelper.instance.save()
         
         // update delegate and dismiss
-        delegate?.updateView()
+        delegate?.setupPopUp()
         self.dismiss(sender)
     }
     
@@ -93,13 +93,13 @@ class ManageProjectsViewController: NSViewController {
         let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
         
         if rowId >= 0 {
-            guard let itemsIndex = ProjectHelper.items.index(where: { $0 === ProjectHelper.getProject(id: rowId) }) else {
+            guard let itemsIndex = ProjectHelper.instance.items.index(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
                 return
             }
-            if !ProjectHelper.items[itemsIndex].setName(sender.stringValue) {
+            if !ProjectHelper.instance.items[itemsIndex].setName(sender.stringValue) {
                 showAlert("Invalid Project Name", message: "Please enter a valid project name that is unique.")
                 // reset table cell text
-                (row as! NSTableCellView).textField?.stringValue = ProjectHelper.items[itemsIndex].name
+                (row as! NSTableCellView).textField?.stringValue = ProjectHelper.instance.items[itemsIndex].name
             }
         }
     }
@@ -109,7 +109,7 @@ class ManageProjectsViewController: NSViewController {
 extension ManageProjectsViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return ProjectHelper.items.count
+        return ProjectHelper.instance.items.count
     }
     
 }
@@ -117,7 +117,7 @@ extension ManageProjectsViewController: NSTableViewDataSource {
 // MARK: NSTableViewDelegate
 extension ManageProjectsViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let item = ProjectHelper.items[row]
+        let item = ProjectHelper.instance.items[row]
         
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ProjectEditCell"), owner: nil) as? NSTableCellView {
             // configure the cell

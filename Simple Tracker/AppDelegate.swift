@@ -11,20 +11,21 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
     func applicationWillFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        ProjectHelper.initialize()
-        TrackedItemHelper.initialize()
+        
+        // if we have nothing after loading, install defaults
+        if ProjectHelper.instance.items.count == 0 {
+            ProjectHelper.instance.installDefaults()
+        }
         
         openWindow()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-        ProjectHelper.save()
-        TrackedItemHelper.save()
+        ProjectHelper.instance.save()
+        TrackedItemHelper.instance.save()
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

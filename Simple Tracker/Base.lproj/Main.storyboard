@@ -374,17 +374,17 @@
             <objects>
                 <viewController title="Simple Tracker" storyboardIdentifier="TimeTracker" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="MainViewController" customModule="Simple_Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="327" height="383"/>
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="391"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ry0-Zv-TSY">
-                                <rect key="frame" x="20" y="38" width="287" height="204"/>
+                                <rect key="frame" x="20" y="38" width="287" height="216"/>
                                 <clipView key="contentView" id="Tx3-2x-Be3">
-                                    <rect key="frame" x="1" y="0.0" width="285" height="203"/>
+                                    <rect key="frame" x="1" y="0.0" width="285" height="215"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="7wH-ix-i37" viewBased="YES" id="T1h-2S-ErK">
-                                            <rect key="frame" x="0.0" y="0.0" width="285" height="178"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="285" height="190"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -508,11 +508,14 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="JlX-vI-I0N"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Q3X-Xv-0DN">
                                     <rect key="frame" x="1" y="208" width="285" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="m3P-vA-xGL">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="m3P-vA-xGL">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -559,13 +562,13 @@
                                 </connections>
                             </button>
                             <box title="Add new entry" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="pnt-eV-Gcn">
-                                <rect key="frame" x="17" y="246" width="293" height="119"/>
+                                <rect key="frame" x="17" y="258" width="293" height="115"/>
                                 <view key="contentView" id="weK-ky-nsK">
-                                    <rect key="frame" x="3" y="3" width="287" height="113"/>
+                                    <rect key="frame" x="3" y="3" width="287" height="109"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-jM-JC3">
-                                            <rect key="frame" x="18" y="69" width="166" height="25"/>
+                                            <rect key="frame" x="18" y="65" width="166" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Projects" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="LFX-n1-cWC" id="FEz-Qn-CdQ">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -577,9 +580,9 @@
                                             </popUpButtonCell>
                                         </popUpButton>
                                         <textField verticalHuggingPriority="749" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="77Q-kl-fgI">
-                                            <rect key="frame" x="20" y="20" width="247" height="44"/>
+                                            <rect key="frame" x="20" y="20" width="247" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="E0g-kT-yuz"/>
+                                                <constraint firstAttribute="height" constant="40" id="E0g-kT-yuz"/>
                                             </constraints>
                                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="What are you doing?" drawsBackground="YES" id="rSa-w9-U9Q">
                                                 <font key="font" metaFont="system"/>
@@ -588,7 +591,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-8z-9a9">
-                                            <rect key="frame" x="183" y="65" width="90" height="32"/>
+                                            <rect key="frame" x="183" y="61" width="90" height="32"/>
                                             <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" image="NSTouchBarPlayTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bce-td-bnZ">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -644,7 +647,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75.5" y="803.5"/>
+            <point key="canvasLocation" x="75.5" y="806.5"/>
         </scene>
         <!--Manage Projects View Controller-->
         <scene sceneID="reB-Xr-019">

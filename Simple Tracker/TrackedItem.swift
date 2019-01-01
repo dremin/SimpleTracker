@@ -16,10 +16,10 @@ class TrackedItem: Codable {
     
     init(project: Int, notes: String, seconds: Int) {
         self.id = -1
-        for i in 0...TrackedItemHelper.items.count {
+        for i in 0...TrackedItemHelper.instance.items.count {
             // get and use the lowest unused id
             var canUse = true
-            TrackedItemHelper.items.forEach { trackedItem in
+            TrackedItemHelper.instance.items.forEach { trackedItem in
                 if trackedItem.id == i {
                     canUse = false
                 }

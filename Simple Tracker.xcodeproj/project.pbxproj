@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2270275221DBBDF100349521 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270275121DBBDF100349521 /* Tracker.swift */; };
 		22AA070321D1441D005663AC /* ManageProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AA070221D1441D005663AC /* ManageProjectsViewController.swift */; };
 		22BDA05321CEE069008C98A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA05221CEE069008C98A7 /* AppDelegate.swift */; };
 		22BDA05521CEE069008C98A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDA05421CEE069008C98A7 /* MainViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2270275121DBBDF100349521 /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		22AA070221D1441D005663AC /* ManageProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProjectsViewController.swift; sourceTree = "<group>"; };
 		22BDA04F21CEE069008C98A7 /* Simple Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BDA05221CEE069008C98A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,15 +68,16 @@
 			isa = PBXGroup;
 			children = (
 				22BDA05221CEE069008C98A7 /* AppDelegate.swift */,
-				22BDA05421CEE069008C98A7 /* MainViewController.swift */,
 				22BDA05621CEE06B008C98A7 /* Assets.xcassets */,
 				22BDA05821CEE06B008C98A7 /* Main.storyboard */,
+				22BDA05421CEE069008C98A7 /* MainViewController.swift */,
 				22AA070221D1441D005663AC /* ManageProjectsViewController.swift */,
-				22BDA06621CEEF53008C98A7 /* ProjectHelper.swift */,
 				22BDA06F21CF0018008C98A7 /* Logger.swift */,
-				22BDA06821CEEF60008C98A7 /* TrackedItemHelper.swift */,
+				2270275121DBBDF100349521 /* Tracker.swift */,
 				22BDA06B21CEFA7D008C98A7 /* Project.swift */,
+				22BDA06621CEEF53008C98A7 /* ProjectHelper.swift */,
 				22BDA06D21CEFA8B008C98A7 /* TrackedItem.swift */,
+				22BDA06821CEEF60008C98A7 /* TrackedItemHelper.swift */,
 				22BDA05B21CEE06B008C98A7 /* Info.plist */,
 				22BDA05C21CEE06B008C98A7 /* Simple Tracker.entitlements */,
 			);
@@ -154,6 +157,7 @@
 				22BDA05521CEE069008C98A7 /* MainViewController.swift in Sources */,
 				22BDA05321CEE069008C98A7 /* AppDelegate.swift in Sources */,
 				22BDA06921CEEF60008C98A7 /* TrackedItemHelper.swift in Sources */,
+				2270275221DBBDF100349521 /* Tracker.swift in Sources */,
 				22BDA06E21CEFA8B008C98A7 /* TrackedItem.swift in Sources */,
 				22BDA07021CF0018008C98A7 /* Logger.swift in Sources */,
 				22BDA06C21CEFA7D008C98A7 /* Project.swift in Sources */,

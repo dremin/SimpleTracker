@@ -10,39 +10,41 @@ import Foundation
 
 class ProjectHelper {
     // MARK: Constants
-    static let NEW_PROJECT_NAME = "New Project"
+    static let instance = ProjectHelper()
+    let NEW_PROJECT_NAME = "New Project"
     
     // MARK: Properties
-    static var items: [Project] = []
+    var items: [Project] = []
+    var archiveURL: URL
     
-    // MARK: Archiving Paths
-    static let ArchiveURL = getUrl()
-    
-    // MARK: Functions
-    public static func initialize() {
-        if ProjectHelper.items.count == 0 {
+    private init() {
+        // get plist url
+        do {
+            archiveURL = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("SimpleTracker.Projects.plist")
+        } catch {
+            archiveURL = URL(fileURLWithPath: "~/Library/Application Support/SimpleTracker.Projects.plist")
+        }
+        
+        // load data
+        if items.count == 0 {
             load()
-            
-            // if we have nothing after loading, install defaults
-            if ProjectHelper.items.count == 0 {
-                installDefaults()
-            }
         }
     }
     
-    static func installDefaults() {
-        ProjectHelper.items.append(Project(name: "Sample Project")!)
+    // MARK: Functions
+    func installDefaults() {
+        items.append(Project(name: "Sample Project")!)
         save()
     }
     
-    static func generateNewName() -> String {
+    func generateNewName() -> String {
         var newName = NEW_PROJECT_NAME
         var unique = false
         var numTries = 0
         
         while !unique {
             unique = true
-            ProjectHelper.items.forEach { project in
+            items.forEach { project in
                 if project.name == newName {
                     unique = false
                 }
@@ -57,19 +59,8 @@ class ProjectHelper {
         return newName
     }
     
-    static func getUrl() -> URL {
-        var url: URL
-        do {
-            url = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("SimpleTracker.Projects.plist")
-        } catch {
-            url = URL(fileURLWithPath: "~/Library/Application Support/SimpleTracker.Projects.plist")
-        }
-        
-        return url
-    }
-    
-    static func getProject(id: Int) -> Project? {
-        for project in ProjectHelper.items {
+    func getProject(id: Int) -> Project? {
+        for project in items {
             if project.id == id {
                 return project
             }
@@ -78,8 +69,8 @@ class ProjectHelper {
         return nil
     }
     
-    static func getProject(name: String) -> Project? {
-        for project in ProjectHelper.items {
+    func getProject(name: String) -> Project? {
+        for project in items {
             if project.name == name {
                 return project
             }
@@ -88,37 +79,37 @@ class ProjectHelper {
         return nil
     }
     
-    static func getNames() -> [String] {
+    func getNames() -> [String] {
         var names: [String] = []
         
-        for project in ProjectHelper.items {
+        for project in items {
             names.append(project.name)
         }
         
         return names
     }
     
-    static func sort() {
+    func sort() {
         items = items.sorted(by: { $0.name < $1.name })
     }
     
     // MARK: Persistence
-    static func load() {
+    func load() {
         do {
-            let data = try Data(contentsOf: ArchiveURL)
+            let data = try Data(contentsOf: archiveURL)
             let decoder = PropertyListDecoder()
-            ProjectHelper.items = try decoder.decode([Project].self, from: data)
+            items = try decoder.decode([Project].self, from: data)
         } catch {
             Logger.log("Error decoding projects: %@", error.localizedDescription)
         }
     }
     
-    public static func save() {
+    func save() {
         sort()
         let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(ProjectHelper.items)
-            try data.write(to: ArchiveURL)
+            let data = try encoder.encode(items)
+            try data.write(to: archiveURL)
         } catch {
             Logger.log("Error encoding projects: %@", error.localizedDescription)
         }
