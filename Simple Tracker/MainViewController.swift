@@ -17,6 +17,12 @@ class MainViewController: NSViewController {
     @IBOutlet weak var removeItemButton: NSButton!
     @IBOutlet weak var clearAllButton: NSButton!
     
+    // MARK: Constants
+    let MANAGE_PROJECTS = "Manage Projects..."
+    
+    // MARK: Properties
+    var lastSelectedProject: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,7 +58,13 @@ class MainViewController: NSViewController {
         
         // add management section
         addProjectPopUp.menu?.addItem(.separator())
-        addProjectPopUp.menu?.addItem(NSMenuItem(title: "Manage Projects...", action: #selector(displayManageProjectsSheet(_:)), keyEquivalent: ""))
+        addProjectPopUp.menu?.addItem(NSMenuItem(title: MANAGE_PROJECTS, action: #selector(displayManageProjectsSheet(_:)), keyEquivalent: ""))
+        
+        if let lastSelected = lastSelectedProject {
+            if addProjectPopUp.item(withTitle: lastSelected) != nil {
+                addProjectPopUp.selectItem(withTitle: lastSelected)
+            }
+        }
     }
     
     func selectionchanged() {
@@ -122,6 +134,13 @@ class MainViewController: NSViewController {
         itemsTableView.removeRows(at: itemsTableView.selectedRowIndexes, withAnimation: .slideUp)
         
         TrackedItemHelper.instance.save()
+    }
+    
+    // MARK: PopUp actions
+    @IBAction func projectSelected(_ sender: NSPopUpButton) {
+        if sender.selectedItem?.title != MANAGE_PROJECTS {
+            lastSelectedProject = sender.selectedItem?.title
+        }
     }
 }
 
