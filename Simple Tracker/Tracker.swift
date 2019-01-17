@@ -17,8 +17,12 @@ class Tracker {
     var timer: Timer?
     var seconds = 0
     var delegate: MainViewController?
+    var activity: NSObjectProtocol?
     
     func startTracking() {
+        // tell system to keep app alive
+        activity = ProcessInfo().beginActivity(options: .userInitiated, reason: "Timer running")
+        
         isTracking = true
         
         delegate?.updateButton()
@@ -33,6 +37,11 @@ class Tracker {
     }
     
     func stopTracking(project: String, notes: String) {
+        // stop system activity to allow sleep
+        if let procinfo = activity {
+            ProcessInfo().endActivity(procinfo)
+        }
+        
         isTracking = false
         
         timer?.invalidate()
