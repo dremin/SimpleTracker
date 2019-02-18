@@ -467,7 +467,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="ItemsNotesColumn" editable="NO" width="96" minWidth="10" maxWidth="3.4028234663852886e+38" id="w5j-8C-Gne">
+                                                <tableColumn identifier="ItemsNotesColumn" width="96" minWidth="10" maxWidth="3.4028234663852886e+38" id="w5j-8C-Gne">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Notes">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -486,11 +486,14 @@
                                                             <subviews>
                                                                 <textField identifier="NotesCell" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fk5-P3-1Ul">
                                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="RzI-G7-PvE">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="RzI-G7-PvE">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <action selector="notesEdited:" target="XfG-lQ-9wD" id="wME-jg-8Tg"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>

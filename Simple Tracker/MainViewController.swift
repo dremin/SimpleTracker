@@ -158,6 +158,30 @@ class MainViewController: NSViewController {
             lastSelectedProject = sender.selectedItem?.title
         }
     }
+    
+    // MARK: Table view actions
+    @IBAction func notesEdited(_ sender: NSTextField) {
+        let rowIndex = itemsTableView.row(for: sender)
+        
+        guard let row = itemsTableView.view(atColumn: 2, row: rowIndex, makeIfNecessary: false) else {
+            return
+        }
+        let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
+        
+        if rowId >= 0 {
+            guard let itemsIndex = TrackedItemHelper.instance.items.index(where: { $0 === TrackedItemHelper.instance.getTrackedItem(id: rowId) }) else {
+                return
+            }
+            
+            TrackedItemHelper.instance.items[itemsIndex].notes = sender.stringValue
+            TrackedItemHelper.instance.save()
+            
+            if SettingsHelper.instance.currentSettings.sortOrder == .notes {
+                sortTable()
+            }
+        }
+    }
+    
 }
 
 // MARK: NSTableViewDataSource
@@ -202,6 +226,7 @@ extension MainViewController: NSTableViewDelegate {
         } else if tableColumn?.identifier.rawValue == "ItemsNotesColumn" {
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemsNotesCell"), owner: nil) as? NSTableCellView {
                 // configure the cell
+                cell.identifier = NSUserInterfaceItemIdentifier(rawValue: String(item.id))
                 cell.textField?.stringValue = item.notes
                 cell.textField?.allowsExpansionToolTips = true
                 return cell

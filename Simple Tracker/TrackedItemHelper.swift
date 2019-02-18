@@ -65,9 +65,9 @@ class TrackedItemHelper {
             }
         case .notes:
             if (ascending) {
-                items = items.sorted(by: { $0.notes < $1.notes })
+                items = items.sorted(by: { $0.notes.lowercased() < $1.notes.lowercased() })
             } else {
-                items = items.sorted(by: { $0.notes > $1.notes })
+                items = items.sorted(by: { $0.notes.lowercased() > $1.notes.lowercased() })
             }
         }
         
