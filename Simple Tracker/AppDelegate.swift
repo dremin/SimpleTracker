@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
         ProjectHelper.instance.save()
         TrackedItemHelper.instance.save()
+        SettingsHelper.instance.save()
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

@@ -16,6 +16,12 @@ class TrackedItemHelper {
     var items: [TrackedItem] = []
     var archiveURL: URL
     
+    enum sortOrder : String, Codable {
+        case project
+        case seconds
+        case notes
+    }
+    
     private init() {
         // get plist url
         do {
@@ -39,6 +45,33 @@ class TrackedItemHelper {
         }
         
         return nil
+    }
+    
+    func sort() {
+        let orderedBy = SettingsHelper.instance.currentSettings.sortOrder
+        let ascending = SettingsHelper.instance.currentSettings.sortAsc
+        switch orderedBy {
+        case .project:
+            if (ascending) {
+                items = items.sorted(by: { (ProjectHelper.instance.getProject(id: $0.project)?.name ?? "") < (ProjectHelper.instance.getProject(id: $1.project)?.name ?? "") })
+            } else {
+                items = items.sorted(by: { (ProjectHelper.instance.getProject(id: $0.project)?.name ?? "") > (ProjectHelper.instance.getProject(id: $1.project)?.name ?? "") })
+            }
+        case .seconds:
+            if (ascending) {
+                items = items.sorted(by: { $0.seconds < $1.seconds })
+            } else {
+                items = items.sorted(by: { $0.seconds > $1.seconds })
+            }
+        case .notes:
+            if (ascending) {
+                items = items.sorted(by: { $0.notes < $1.notes })
+            } else {
+                items = items.sorted(by: { $0.notes > $1.notes })
+            }
+        }
+        
+        return
     }
     
     // MARK: Persistence

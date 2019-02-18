@@ -46,7 +46,9 @@ class Tracker {
         
         timer?.invalidate()
         
-        TrackedItemHelper.instance.items.append(TrackedItem(project: ProjectHelper.instance.getProject(name: project)?.id ?? 0, notes: notes, seconds: seconds))
+        let newItem = TrackedItem(project: ProjectHelper.instance.getProject(name: project)?.id ?? 0, notes: notes, seconds: seconds);
+        TrackedItemHelper.instance.items.append(newItem)
+        TrackedItemHelper.instance.sort()
         
         // reset state
         delegate?.updateButton()
@@ -58,7 +60,7 @@ class Tracker {
         TrackedItemHelper.instance.save()
         
         // update table
-        delegate?.updateTable()
+        delegate?.updateTable(TrackedItemHelper.instance.items.index{$0 === newItem} ?? TrackedItemHelper.instance.items.count - 1)
     }
     
     func secondsString() -> String {

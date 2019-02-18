@@ -34,6 +34,17 @@ class MainViewController: NSViewController {
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
         Tracker.instance.delegate = self
+        
+        // sort descriptors for table view
+        let descProject = NSSortDescriptor(key: TrackedItemHelper.sortOrder.project.rawValue, ascending: true)
+        let descSeconds = NSSortDescriptor(key: TrackedItemHelper.sortOrder.seconds.rawValue, ascending: true)
+        let descNotes = NSSortDescriptor(key: TrackedItemHelper.sortOrder.notes.rawValue, ascending: true)
+        itemsTableView.tableColumns[0].sortDescriptorPrototype = descProject;
+        itemsTableView.tableColumns[1].sortDescriptorPrototype = descSeconds;
+        itemsTableView.tableColumns[2].sortDescriptorPrototype = descNotes;
+        
+        // load sort based on settings
+        itemsTableView.sortDescriptors = [ NSSortDescriptor(key: SettingsHelper.instance.currentSettings.sortOrder.rawValue, ascending: SettingsHelper.instance.currentSettings.sortAsc) ]
     }
 
     override var representedObject: Any? {
@@ -87,14 +98,19 @@ class MainViewController: NSViewController {
         }
     }
     
-    func updateTable() {
+    func updateTable(_ newIndex: Int) {
         itemsTableView.beginUpdates()
-        itemsTableView.insertRows(at: IndexSet(integer: TrackedItemHelper.instance.items.count - 1), withAnimation: .slideDown)
+        itemsTableView.insertRows(at: IndexSet(integer: newIndex), withAnimation: .slideDown)
         itemsTableView.endUpdates()
     }
     
     func clearNotes() {
         addNotesField.stringValue = ""
+    }
+    
+    func sortTable() {
+        TrackedItemHelper.instance.sort()
+        itemsTableView.reloadData()
     }
     
     // MARK: Button actions
@@ -149,6 +165,17 @@ extension MainViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return TrackedItemHelper.instance.items.count
+    }
+    
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        guard let sortDescriptor = tableView.sortDescriptors.first else {
+            return
+        }
+        if let order = TrackedItemHelper.sortOrder(rawValue: sortDescriptor.key!) {
+            SettingsHelper.instance.currentSettings.sortOrder = order
+            SettingsHelper.instance.currentSettings.sortAsc = sortDescriptor.ascending
+            sortTable()
+        }
     }
     
 }
