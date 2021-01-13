@@ -60,7 +60,7 @@ class Tracker {
         TrackedItemHelper.instance.save()
         
         // update table
-        delegate?.updateTable(TrackedItemHelper.instance.items.index{$0 === newItem} ?? TrackedItemHelper.instance.items.count - 1)
+        delegate?.updateTable(TrackedItemHelper.instance.items.firstIndex{$0 === newItem} ?? TrackedItemHelper.instance.items.count - 1)
     }
     
     func secondsString() -> String {

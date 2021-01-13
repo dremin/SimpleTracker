@@ -64,7 +64,7 @@ class ManageProjectsViewController: NSViewController {
             let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
             
             if rowId >= 0 {
-                guard let itemsIndex = ProjectHelper.instance.items.index(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
+                guard let itemsIndex = ProjectHelper.instance.items.firstIndex(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
                     continue
                 }
                 ProjectHelper.instance.items.remove(at: itemsIndex)
@@ -93,7 +93,7 @@ class ManageProjectsViewController: NSViewController {
         let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
         
         if rowId >= 0 {
-            guard let itemsIndex = ProjectHelper.instance.items.index(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
+            guard let itemsIndex = ProjectHelper.instance.items.firstIndex(where: { $0 === ProjectHelper.instance.getProject(id: rowId) }) else {
                 return
             }
             if !ProjectHelper.instance.items[itemsIndex].setName(sender.stringValue) {

@@ -10,6 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var mainWindow: NSWindowController? = nil
 
     func applicationWillFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -40,8 +42,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: Bundle.main)
         let window = storyboard.instantiateController(withIdentifier: "MainWindow") as! NSWindowController
         window.showWindow(self)
+        
+        mainWindow = window
     }
 
-
+    // TODO: This is no bueno.
+    @IBAction func toggleTimerMenuItemSelected(_ sender: NSMenuItem) {
+        guard let mainVC = mainWindow?.contentViewController as? MainViewController else {
+            return
+        }
+        
+        mainVC.toggleTimer()
+    }
+    
+    @IBAction func manageProjectsMenuItemSelected(_ sender: NSMenuItem) {
+        guard let mainVC = mainWindow?.contentViewController as? MainViewController else {
+            return
+        }
+        
+        mainVC.displayManageProjectsSheet(sender)
+    }
 }
 

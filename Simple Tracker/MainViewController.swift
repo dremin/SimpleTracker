@@ -113,8 +113,7 @@ class MainViewController: NSViewController {
         itemsTableView.reloadData()
     }
     
-    // MARK: Button actions
-    @IBAction func addButtonPressed(_ sender: NSButton) {
+    func toggleTimer() {
         if Tracker.instance.isTracking {
             // stop tracking
             Tracker.instance.stopTracking(project: addProjectPopUp.selectedItem?.title ?? "", notes: addNotesField.stringValue)
@@ -122,6 +121,11 @@ class MainViewController: NSViewController {
             // start tracking
             Tracker.instance.startTracking()
         }
+    }
+    
+    // MARK: Button actions
+    @IBAction func addButtonPressed(_ sender: NSButton) {
+        toggleTimer()
     }
     
     @IBAction func clearAllButtonPressed(_ sender: NSButton) {
@@ -140,7 +144,7 @@ class MainViewController: NSViewController {
             let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
             
             if rowId >= 0 {
-                guard let itemsIndex = TrackedItemHelper.instance.items.index(where: { $0 === TrackedItemHelper.instance.getTrackedItem(id: rowId) }) else {
+                guard let itemsIndex = TrackedItemHelper.instance.items.firstIndex(where: { $0 === TrackedItemHelper.instance.getTrackedItem(id: rowId) }) else {
                     continue
                 }
                 TrackedItemHelper.instance.items.remove(at: itemsIndex)
@@ -169,7 +173,7 @@ class MainViewController: NSViewController {
         let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
         
         if rowId >= 0 {
-            guard let itemsIndex = TrackedItemHelper.instance.items.index(where: { $0 === TrackedItemHelper.instance.getTrackedItem(id: rowId) }) else {
+            guard let itemsIndex = TrackedItemHelper.instance.items.firstIndex(where: { $0 === TrackedItemHelper.instance.getTrackedItem(id: rowId) }) else {
                 return
             }
             
