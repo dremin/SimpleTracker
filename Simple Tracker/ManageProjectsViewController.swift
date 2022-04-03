@@ -11,10 +11,13 @@ import Cocoa
 class ManageProjectsViewController: NSViewController {
     
     // MARK: Outlets
-    @IBOutlet weak var addButton: NSButton!
-    @IBOutlet weak var removeButton: NSButton!
+    @IBOutlet weak var addRemoveControl: NSSegmentedControl!
     @IBOutlet weak var closeButton: NSButton!
     @IBOutlet weak var tableView: NSTableView!
+    
+    // MARK: Constants
+    let INVALID_PROJECT_TITLE = "Invalid Project Name"
+    let INVALID_PROJECT_INFO = "Please enter a valid project name that is unique."
     
     // MARK: Properties
     var delegate: MainViewController?
@@ -31,9 +34,9 @@ class ManageProjectsViewController: NSViewController {
         let itemCount = tableView.selectedRowIndexes.count
         
         if itemCount > 0 {
-            removeButton.isEnabled = true
+            addRemoveControl.setEnabled(true, forSegment: 1)
         } else {
-            removeButton.isEnabled = false
+            addRemoveControl.setEnabled(false, forSegment: 1)
         }
     }
     
@@ -46,8 +49,7 @@ class ManageProjectsViewController: NSViewController {
         alert.beginSheetModal(for: self.view.window!, completionHandler: nil)
     }
     
-    // MARK: Button actions
-    @IBAction func addButtonPressed(_ sender: NSButton) {
+    func addProject() {
         ProjectHelper.instance.items.append(Project(name: ProjectHelper.instance.generateNewName())!)
         tableView.beginUpdates()
         tableView.insertRows(at: IndexSet(integer: ProjectHelper.instance.items.count - 1), withAnimation: .slideDown)
@@ -55,7 +57,7 @@ class ManageProjectsViewController: NSViewController {
         tableView.editColumn(0, row: ProjectHelper.instance.items.count - 1, with: nil, select: true)
     }
     
-    @IBAction func removeButtonPressed(_ sender: NSButton) {
+    func removeSelectedProject() {
         for index in tableView.selectedRowIndexes {
             guard let row = tableView.view(atColumn: 0, row: index, makeIfNecessary: false) else {
                 continue
@@ -72,6 +74,15 @@ class ManageProjectsViewController: NSViewController {
         }
         
         tableView.removeRows(at: tableView.selectedRowIndexes, withAnimation: .slideUp)
+    }
+    
+    // MARK: Button actions
+    @IBAction func addRemoveButtonPressed(_ sender: NSSegmentedControl) {
+        if (sender.selectedSegment == 0) {
+            addProject()
+        } else {
+            removeSelectedProject()
+        }
     }
     
     @IBAction func closeButtonPressed(_ sender: NSButton) {
@@ -97,7 +108,7 @@ class ManageProjectsViewController: NSViewController {
                 return
             }
             if !ProjectHelper.instance.items[itemsIndex].setName(sender.stringValue) {
-                showAlert("Invalid Project Name", message: "Please enter a valid project name that is unique.")
+                showAlert(INVALID_PROJECT_TITLE, message: INVALID_PROJECT_INFO)
                 // reset table cell text
                 (row as! NSTableCellView).textField?.stringValue = ProjectHelper.instance.items[itemsIndex].name
             }

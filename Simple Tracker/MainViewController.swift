@@ -19,6 +19,10 @@ class MainViewController: NSViewController {
     
     // MARK: Constants
     let MANAGE_PROJECTS = "Manage Projects..."
+    let DELETE_ALL_TITLE = "Delete All Entries?"
+    let DELETE_ALL_INFO = "All tracked entries will be deleted. This action cannot be undone."
+    let DELETE_ALL_DELETE_BUTTON = "Delete"
+    let DELETE_ALL_CANCEL_BUTTON = "Cancel"
     
     // MARK: Properties
     var lastSelectedProject: String?
@@ -123,16 +127,31 @@ class MainViewController: NSViewController {
         }
     }
     
+    func deleteAll() {
+        TrackedItemHelper.instance.items.removeAll()
+        TrackedItemHelper.instance.save()
+        
+        itemsTableView.reloadData()
+    }
+    
     // MARK: Button actions
     @IBAction func addButtonPressed(_ sender: NSButton) {
         toggleTimer()
     }
     
     @IBAction func clearAllButtonPressed(_ sender: NSButton) {
-        TrackedItemHelper.instance.items.removeAll()
-        TrackedItemHelper.instance.save()
+        let alert: NSAlert = NSAlert()
+        alert.messageText = DELETE_ALL_TITLE
+        alert.informativeText = DELETE_ALL_INFO
+        alert.alertStyle = .critical
+        alert.addButton(withTitle: DELETE_ALL_DELETE_BUTTON).hasDestructiveAction = true
+        alert.addButton(withTitle: DELETE_ALL_CANCEL_BUTTON)
         
-        itemsTableView.reloadData()
+        alert.beginSheetModal(for: self.view.window!) { response in
+            if (response == .alertFirstButtonReturn) {
+                self.deleteAll()
+            }
+        }
     }
     
     @IBAction func removeButtonPressed(_ sender: NSButton) {
