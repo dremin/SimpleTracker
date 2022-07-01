@@ -18,6 +18,7 @@ class TrackedItemHelper {
     
     enum sortOrder : String, Codable {
         case project
+        case timestamp
         case seconds
         case notes
     }
@@ -68,6 +69,12 @@ class TrackedItemHelper {
                 items = items.sorted(by: { $0.notes.lowercased() < $1.notes.lowercased() })
             } else {
                 items = items.sorted(by: { $0.notes.lowercased() > $1.notes.lowercased() })
+            }
+        case .timestamp:
+            if (ascending) {
+                items = items.sorted(by: { $0.timestamp < $1.timestamp })
+            } else {
+                items = items.sorted(by: { $0.timestamp > $1.timestamp })
             }
         }
         

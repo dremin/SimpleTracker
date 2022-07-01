@@ -40,12 +40,14 @@ class MainViewController: NSViewController {
         Tracker.instance.delegate = self
         
         // sort descriptors for table view
+        let descTimestamp = NSSortDescriptor(key: TrackedItemHelper.sortOrder.timestamp.rawValue, ascending: true)
         let descProject = NSSortDescriptor(key: TrackedItemHelper.sortOrder.project.rawValue, ascending: true)
         let descSeconds = NSSortDescriptor(key: TrackedItemHelper.sortOrder.seconds.rawValue, ascending: true)
         let descNotes = NSSortDescriptor(key: TrackedItemHelper.sortOrder.notes.rawValue, ascending: true)
-        itemsTableView.tableColumns[0].sortDescriptorPrototype = descProject;
-        itemsTableView.tableColumns[1].sortDescriptorPrototype = descSeconds;
-        itemsTableView.tableColumns[2].sortDescriptorPrototype = descNotes;
+        itemsTableView.tableColumns[0].sortDescriptorPrototype = descTimestamp
+        itemsTableView.tableColumns[1].sortDescriptorPrototype = descProject
+        itemsTableView.tableColumns[2].sortDescriptorPrototype = descSeconds
+        itemsTableView.tableColumns[3].sortDescriptorPrototype = descNotes
         
         // load sort based on settings
         itemsTableView.sortDescriptors = [ NSSortDescriptor(key: SettingsHelper.instance.currentSettings.sortOrder.rawValue, ascending: SettingsHelper.instance.currentSettings.sortAsc) ]
@@ -232,7 +234,17 @@ extension MainViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let item = TrackedItemHelper.instance.items[row]
         
-        if tableColumn?.identifier.rawValue == "ItemsProjectColumn" {
+        if tableColumn?.identifier.rawValue == "ItemsTimestampColumn" {
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemsTimestampCell"), owner: nil) as? NSTableCellView {
+                // configure the cell
+                cell.identifier = NSUserInterfaceItemIdentifier(rawValue: String(item.id))
+                let dateFormat = DateFormatter()
+                dateFormat.dateFormat = "M/d"
+                cell.textField?.stringValue = dateFormat.string(from: item.timestamp)
+                cell.textField?.allowsExpansionToolTips = true
+                return cell
+            }
+        } else if tableColumn?.identifier.rawValue == "ItemsProjectColumn" {
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemsProjectCell"), owner: nil) as? NSTableCellView {
                 // configure the cell
                 cell.identifier = NSUserInterfaceItemIdentifier(rawValue: String(item.id))

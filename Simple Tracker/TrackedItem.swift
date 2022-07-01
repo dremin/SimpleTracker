@@ -13,6 +13,7 @@ class TrackedItem: Codable {
     var project: Int
     var notes: String
     var seconds: Int
+    var timestamp: Date
     
     init(project: Int, notes: String, seconds: Int) {
         self.id = -1
@@ -33,5 +34,6 @@ class TrackedItem: Codable {
         self.project = project
         self.notes = notes
         self.seconds = seconds
+        self.timestamp = Date.now
     }
 }
