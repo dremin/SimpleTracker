@@ -97,10 +97,10 @@ class MainViewController: NSViewController {
     func updateButton() {
         if Tracker.instance.isTracking {
             addButton.title = Tracker.instance.secondsString()
-            addButton.image = NSImage(named: "NSTouchBarRecordStopTemplate")
+            addButton.image = NSImage(systemSymbolName: "stop.fill", accessibilityDescription: nil)
         } else {
             addButton.title = "Start"
-            addButton.image = NSImage(named: "NSTouchBarPlayTemplate")
+            addButton.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: nil)
         }
     }
     
@@ -188,7 +188,7 @@ class MainViewController: NSViewController {
     @IBAction func notesEdited(_ sender: NSTextField) {
         let rowIndex = itemsTableView.row(for: sender)
         
-        guard let row = itemsTableView.view(atColumn: 2, row: rowIndex, makeIfNecessary: false) else {
+        guard let row = itemsTableView.view(atColumn: 3, row: rowIndex, makeIfNecessary: false) else {
             return
         }
         let rowId = Int(row.identifier?.rawValue ?? "-1") ?? -1
